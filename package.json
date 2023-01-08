@@ -1,0 +1,60 @@
+{
+  "name": "@open-wc/dev-server-hmr",
+  "version": "0.1.3",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Plugin for HMR with web components",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-wc/open-wc.git",
+    "directory": "packages/dev-server-hmr"
+  },
+  "author": "open-wc",
+  "homepage": "https://github.com/open-wc/open-wc/packages/dev-server-hmr",
+  "main": "src/index.js",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./src/index.js"
+    }
+  },
+  "scripts": {
+    "prepublishOnly": "publish-docs --github-url https://github.com/open-wc/open-wc/ --git-root-dir ../../",
+    "start:fast": "wds --config demo/fast-element/server.config.mjs",
+    "start:haunted": "wds --config demo/haunted/server.config.mjs",
+    "start:lit": "wds --config demo/lit-element/server.config.mjs",
+    "start:lit-ts": "wds --config demo/lit-element-ts/server.config.mjs",
+    "start:storybook": "wds --config demo/storybook/server.config.mjs",
+    "start:vanilla": "wds --config demo/vanilla/server.config.mjs",
+    "test": "npm run test:node",
+    "test:node": "mocha test-node --recursive",
+    "test:watch": "npm run test:node -- --watch --watchfiles test"
+  },
+  "files": [
+    "dist",
+    "index.mjs",
+    "src"
+  ],
+  "keywords": [
+    "web",
+    "dev server",
+    "hmr",
+    "hot",
+    "module",
+    "replacement",
+    "reload",
+    "web",
+    "components"
+  ],
+  "dependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-syntax-class-properties": "^7.12.13",
+    "@babel/plugin-syntax-import-assertions": "^7.12.1",
+    "@babel/plugin-syntax-top-level-await": "^7.12.1",
+    "@web/dev-server-core": "^0.3.10",
+    "@web/dev-server-hmr": "^0.1.6",
+    "picomatch": "^2.2.2"
+  }
+}
