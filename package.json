@@ -1,14 +1,15 @@
 {
-  "name": "@open-wc/dev-server-hmr",
-  "version": "0.1.3",
+  "name": "vite-plugin-web-components-hmr",
+  "version": "0.0.1",
   "publishConfig": {
     "access": "public"
   },
-  "description": "Plugin for HMR with web components",
+  "packageManager": "pnpm@7.23.0",
+  "description": "Vite plugin for HMR with web components",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/open-wc/open-wc.git",
+    "url": "https://github.com/fi3ework/vite-plugin-web-components-hmr.git",
     "directory": "packages/dev-server-hmr"
   },
   "author": "open-wc",
@@ -56,5 +57,11 @@
     "@web/dev-server-core": "^0.3.10",
     "@web/dev-server-hmr": "^0.1.6",
     "picomatch": "^2.2.2"
+  },
+  "peerDependencies": {
+    "vite": ">=2"
+  },
+  "devDependencies": {
+    "vite": "^4.0.4"
   }
 }
