@@ -1,5 +1,5 @@
 // const { hmrPlugin } = require('./hmrPlugin.js')
-const { hmrPlugin } = require('./hmrPlugin2.js')
+const { hmrPlugin } = require('./hmrPlugin-vite.js')
 const { litElement } = require('./presets/litElement.js')
 const { lit } = require('./presets/lit.js')
 const { fastElement } = require('./presets/fastElement.js')

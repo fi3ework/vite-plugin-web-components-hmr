@@ -39,7 +39,6 @@
 
 const fs = require('fs')
 const path = require('path')
-const lit = require('./presets/lit.js').lit
 const { babelTransform } = require('./babel/babelTransform.js')
 const { parseConfig, createMatchers, createError } = require('./utils.js')
 const {
@@ -47,13 +46,6 @@ const {
   WC_HMR_MODULE_RUNTIME,
   WC_HMR_MODULE_PATCH,
 } = require('./constants.js')
-
-const litPreset = {
-  decorators: lit.decorators,
-  baseClasses: lit.baseClasses,
-  functions: [],
-  patches: [lit.patch],
-}
 
 const wcHmrRuntime = fs.readFileSync(
   path.resolve(__dirname, 'wcHmrRuntime.js'),
@@ -65,7 +57,7 @@ const wcHmrRuntime = fs.readFileSync(
  * @returns {DevServerPlugin}
  */
 function hmrPlugin(pluginConfig) {
-  let shouldSkip = false
+  let shouldSkipHmr = false
 
   /** @type {string} */
   let rootDir
@@ -79,7 +71,7 @@ function hmrPlugin(pluginConfig) {
   return {
     name: 'lit-hrm',
     configResolved(config) {
-      shouldSkip = config.command === 'build' || config.isProduction
+      shouldSkipHmr = config.command === 'build' || config.isProduction
       rootDir = config.root
     },
     configureServer(server) {
@@ -120,6 +112,8 @@ function hmrPlugin(pluginConfig) {
       }
     },
     async transform(code, id, options) {
+      if (shouldSkipHmr) return
+
       const filePath = id
       if (id.startsWith('/__web-dev-server__')) {
         return
@@ -141,29 +135,35 @@ function hmrPlugin(pluginConfig) {
             patches: parsedPluginConfig.patches,
             rootDir,
           })
-        } catch (error) {
-          //   if (error.name === 'SyntaxError') {
-          //     // forward babel error to dev server
-          //     const strippedMsg = error.message.replace(
-          //       new RegExp(`${filePath} ?:? ?`, 'g'),
-          //       ''
-          //     )
-          //     throw new PluginSyntaxError(
-          //       strippedMsg,
-          //       filePath,
-          //       error.code,
-          //       error.loc,
-          //       error.pos
-          //     )
-          //   }
-          //   throw error
-          // }
-        }
 
-        return transformedCode
+          return transformedCode
+        } catch (/** @type {any} */ error) {
+          if (error.name === 'SyntaxError') {
+            // forward babel error to dev server
+            const strippedMsg = error.message.replace(
+              new RegExp(`${filePath} ?:? ?`, 'g'),
+              ''
+            )
+            // throw new PluginSyntaxError(
+            //   strippedMsg,
+            //   filePath,
+            //   error.code,
+            //   error.loc,
+            //   error.pos
+            // )
+            console.error(
+              `PluginSyntaxError` +
+                [strippedMsg, filePath, error.code, error.loc, error.pos]
+                  .map((v) => JSON.stringify(v))
+                  .join('\n')
+            )
+          }
+        }
       }
+
+      return transformedCode
     },
-    transformIndexHtml() {},
+    // transformIndexHtml() {},
   }
 }
 
