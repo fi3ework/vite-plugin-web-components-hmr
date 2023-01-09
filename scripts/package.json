@@ -1,0 +1,19 @@
+{
+  "name": "@vite-plugin-web-components-hmr/scripts",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "clone": "tsx src/clone.mts"
+  },
+  "devDependencies": {
+    "@tsconfig/node16-strictest-esm": "^1.0.3",
+    "@types/adm-zip": "^0.5.0",
+    "@types/micromatch": "^4.0.2",
+    "adm-zip": "^0.5.10",
+    "got": "^12.5.3",
+    "micromatch": "^4.0.5",
+    "octokit": "^2.0.11",
+    "tsx": "^3.12.2"
+  }
+}

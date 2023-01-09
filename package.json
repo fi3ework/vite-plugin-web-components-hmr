@@ -1,11 +1,8 @@
 {
-  "name": "vite-plugin-web-components-hmr",
-  "version": "0.0.2",
-  "publishConfig": {
-    "access": "public"
-  },
+  "name": "@vite-plugin-web-components-hmr/monorepo",
+  "private": true,
+  "type": "module",
   "packageManager": "pnpm@7.23.0",
-  "description": "Vite plugin for HMR with web components",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -15,50 +12,23 @@
   "author": "open-wc",
   "homepage": "https://github.com/open-wc/open-wc/packages/dev-server-hmr",
   "main": "src/index.js",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./src/index.js"
-    }
-  },
   "scripts": {
-    "start:fast": "wds --config demo/fast-element/server.config.mjs",
-    "start:haunted": "wds --config demo/haunted/server.config.mjs",
-    "start:lit": "wds --config demo/lit-element/server.config.mjs",
-    "start:lit-ts": "wds --config demo/lit-element-ts/server.config.mjs",
-    "start:storybook": "wds --config demo/storybook/server.config.mjs",
-    "start:vanilla": "wds --config demo/vanilla/server.config.mjs",
-    "test": "npm run test:node",
-    "test:node": "mocha test-node --recursive",
-    "test:watch": "npm run test:node -- --watch --watchfiles test"
+    "clone": "pnpm -r --filter='./scripts' run clone"
   },
-  "files": [
-    "dist",
-    "index.mjs",
-    "src"
-  ],
-  "keywords": [
-    "web",
-    "dev server",
-    "hmr",
-    "hot",
-    "module",
-    "replacement",
-    "reload",
-    "web",
-    "components"
-  ],
   "dependencies": {
     "@babel/core": "^7.12.3",
     "@babel/plugin-syntax-class-properties": "^7.12.13",
     "@babel/plugin-syntax-import-assertions": "^7.12.1",
     "@babel/plugin-syntax-top-level-await": "^7.12.1",
+    "micromatch": "^4.0.5",
     "picomatch": "^2.2.2"
   },
-  "peerDependencies": {
-    "vite": ">=2"
-  },
   "devDependencies": {
+    "@types/adm-zip": "^0.5.0",
+    "adm-zip": "^0.5.10",
+    "got": "^12.5.3",
+    "octokit": "^2.0.11",
+    "tsx": "^3.12.2",
     "vite": "^4.0.4"
   }
 }
