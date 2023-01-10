@@ -22,6 +22,8 @@ const dirPatterns = [
   'src/index.js',
   'src/utils.js',
   'src/wcHmrRuntime.js',
+  'index.mjs',
+  'index.d.ts',
 ].map((v) => devSeverHmrDir + v)
 
 const pipeline = promisify(stream.pipeline)

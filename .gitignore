@@ -105,5 +105,7 @@ dist
 
 # for vite-plugin-web-components-hmr
 packages/dev-server-hmr/src/**
+packages/dev-server-hmr/index.d.ts
+packages/dev-server-hmr/index.mjs
 !packages/dev-server-hmr/src/hmrPlugin.js
 scripts/open-wc.zip
