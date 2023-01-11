@@ -1,19 +1,18 @@
 {
   "name": "vite-plugin-web-components-hmr",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publishConfig": {
     "access": "public"
   },
   "packageManager": "pnpm@7.23.0",
-  "description": "Vite plugin for HMR with web components",
+  "description": "Vite plugin for HMR of web components",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fi3ework/vite-plugin-web-components-hmr.git",
-    "directory": "packages/dev-server-hmr"
+    "url": "https://github.com/fi3ework/vite-plugin-web-components-hmr.git"
   },
-  "author": "open-wc",
-  "homepage": "https://github.com/open-wc/open-wc/packages/dev-server-hmr",
+  "author": "fi3ework <fi3ework@gmail.com> (http://github.com/fi3ework)",
+  "homepage": "https://github.com/fi3ework/vite-plugin-web-components-hmr",
   "main": "src/index.js",
   "exports": {
     ".": {
