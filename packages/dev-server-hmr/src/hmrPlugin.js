@@ -1,3 +1,7 @@
+/**
+ * Adapt from https://github.com/open-wc/open-wc/blob/master/packages/dev-server-hmr/src/hmrPlugin.js under MIT license.
+ */
+
 /** @typedef {import('vite').Plugin} DevServerPlugin */
 /** @typedef {import('./utils').Matcher} Matcher */
 
@@ -70,6 +74,8 @@ function hmrPlugin(pluginConfig) {
 
   return {
     name: 'lit-hrm',
+    // TODO: current babel config can not handle TS source code now
+    // enforce: 'pre',
     configResolved(config) {
       shouldSkipHmr = config.command === 'build' || config.isProduction
       rootDir = config.root
@@ -85,14 +91,6 @@ function hmrPlugin(pluginConfig) {
 
       return
     },
-    // handleHotUpdate(ctx) {
-    //   ctx.server.ws.send({
-    //     type: 'custom',
-    //     event: 'special-update',
-    //     data: {}
-    //   })
-    //   return []
-    // },
     resolveId(id) {
       if (id.startsWith(WC_HMR_MODULE_PREFIX)) {
         return id
@@ -115,7 +113,10 @@ function hmrPlugin(pluginConfig) {
       if (shouldSkipHmr) return
 
       const filePath = id
-      if (id.startsWith('/__web-dev-server__')) {
+      if (
+        id.startsWith('/__web-dev-server__') ||
+        ['.mjs', '.js', '.ts', '.json'].includes(path.extname(id))
+      ) {
         return
       }
 
@@ -144,13 +145,6 @@ function hmrPlugin(pluginConfig) {
               new RegExp(`${filePath} ?:? ?`, 'g'),
               ''
             )
-            // throw new PluginSyntaxError(
-            //   strippedMsg,
-            //   filePath,
-            //   error.code,
-            //   error.loc,
-            //   error.pos
-            // )
             console.error(
               `PluginSyntaxError` +
                 [strippedMsg, filePath, error.code, error.loc, error.pos]
@@ -163,7 +157,6 @@ function hmrPlugin(pluginConfig) {
 
       return transformedCode
     },
-    // transformIndexHtml() {},
   }
 }
 
