@@ -115,7 +115,7 @@ function hmrPlugin(pluginConfig) {
       const filePath = id
       if (
         id.startsWith('/__web-dev-server__') ||
-        ['.mjs', '.js', '.ts', '.json'].includes(path.extname(id))
+        !['.mjs', '.js', '.ts', '.json'].includes(path.extname(id))
       ) {
         return
       }
