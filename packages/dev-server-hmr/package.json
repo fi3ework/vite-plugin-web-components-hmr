@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-web-components-hmr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publishConfig": {
     "access": "public"
   },
@@ -14,8 +14,10 @@
   "author": "fi3ework <fi3ework@gmail.com> (http://github.com/fi3ework)",
   "homepage": "https://github.com/fi3ework/vite-plugin-web-components-hmr",
   "main": "src/index.js",
+  "types": "./index.d.ts",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "import": "./index.mjs",
       "require": "./src/index.js"
     }
@@ -37,6 +39,7 @@
   "files": [
     "dist",
     "index.mjs",
+    "index.d.ts",
     "src"
   ],
   "keywords": [

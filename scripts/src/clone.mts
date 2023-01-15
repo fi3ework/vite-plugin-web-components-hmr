@@ -15,7 +15,7 @@ const __dirname = path.dirname(__filename)
 const zipName = 'open-wc.zip'
 const dest = path.resolve(__dirname, `../../`)
 const devSeverHmrDir = 'packages/dev-server-hmr/'
-const dirPatterns = [
+const filePatterns = [
   'src/babel/**',
   'src/presets/**',
   'src/constants.js',
@@ -23,7 +23,6 @@ const dirPatterns = [
   'src/utils.js',
   'src/wcHmrRuntime.js',
   'index.mjs',
-  'index.d.ts',
 ].map((v) => devSeverHmrDir + v)
 
 const pipeline = promisify(stream.pipeline)
@@ -46,7 +45,7 @@ const zip = new AdmZip(filePath)
 const entries = zip.getEntries()
 entries.forEach((entry) => {
   const relativePath = entry.entryName.split('/').slice(1).join('/')
-  if (micromatch.isMatch(relativePath, dirPatterns)) {
+  if (micromatch.isMatch(relativePath, filePatterns)) {
     console.log(`⏳ Saving ${relativePath}`)
     if (!entry.isDirectory) {
       zip.extractEntryTo(
