@@ -105,7 +105,15 @@ dist
 
 # for vite-plugin-web-components-hmr
 scripts/open-wc.zip
+
 # sync with `scripts/clone.mts`
-packages/dev-server-hmr/src/**
+# holy git https://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
 packages/dev-server-hmr/index.mjs
+
+!packages/dev-server-hmr/src/
+packages/dev-server-hmr/src/*
 !packages/dev-server-hmr/src/hmrPlugin.js
+
+!packages/dev-server-hmr/src/babel/
+packages/dev-server-hmr/src/babel/*
+!packages/dev-server-hmr/src/babel/babelTransform.js

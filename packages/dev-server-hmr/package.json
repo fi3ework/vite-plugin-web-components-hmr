@@ -64,6 +64,7 @@
     "vite": ">=2"
   },
   "devDependencies": {
+    "@types/babel__core": "^7.20.0",
     "rimraf": "^3.0.2",
     "vite": "^4.0.4"
   }
