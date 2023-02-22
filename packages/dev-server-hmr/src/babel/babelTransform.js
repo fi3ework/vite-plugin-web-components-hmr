@@ -1,9 +1,9 @@
-const { transformAsync } = require('@babel/core');
+const { transformAsync } = require('@babel/core')
 
-const babelPluginWcHmr = require('./babel/babelPluginWcHmr.js');
-const { createError } = require('./utils.js');
+const babelPluginWcHmr = require('./babelPluginWcHmr.js')
+const { createError } = require('../utils.js')
 
-/** @typedef {import('./babel/babelPluginWcHmr').BabelPluginWcHmrOptions} BabelPluginWcHmrOptions */
+/** @typedef {import('./babelPluginWcHmr').BabelPluginWcHmrOptions} BabelPluginWcHmrOptions */
 
 /**
  * @param {string} code
@@ -12,7 +12,7 @@ const { createError } = require('./utils.js');
  * @return {Promise<import('@babel/core').BabelFileResult>}
  */
 async function babelTransform(code, filename, options) {
-  const largeFile = code.length > 100000;
+  const largeFile = code.length > 100000
   const result = await transformAsync(code, {
     caller: {
       name: '@open-wc/dev-server-hmr',
@@ -29,13 +29,14 @@ async function babelTransform(code, filename, options) {
     configFile: false,
     compact: largeFile,
     sourceType: 'module',
-    sourceMaps: true
-  });
+    sourceMaps: true,
+  })
 
   if (!result || !result.code) {
-    throw createError(`Failed to babel transform ${filename}`);
+    throw createError(`Failed to babel transform ${filename}`)
   }
-  return result;
+
+  return result
 }
 
-module.exports = { babelTransform };
+module.exports = { babelTransform }
