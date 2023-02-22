@@ -43,13 +43,13 @@
 
 const fs = require('fs')
 const path = require('path')
-const { babelTransform } = require('./babel/babelTransform.js')
 const { parseConfig, createMatchers, createError } = require('./utils.js')
 const {
   WC_HMR_MODULE_PREFIX,
   WC_HMR_MODULE_RUNTIME,
   WC_HMR_MODULE_PATCH,
 } = require('./constants.js')
+const { babelTransform } = require('./babel-transform')
 
 const wcHmrRuntime = fs.readFileSync(
   path.resolve(__dirname, 'wcHmrRuntime.js'),
@@ -120,8 +120,6 @@ function hmrPlugin(pluginConfig) {
         return
       }
 
-      let transformedCode = code
-
       if (
         matchInclude(filePath) &&
         !matchExclude(filePath) &&
@@ -129,7 +127,7 @@ function hmrPlugin(pluginConfig) {
         typeof code === 'string'
       ) {
         try {
-          transformedCode = await babelTransform(code, filePath, {
+          const result = await babelTransform(code, filePath, {
             baseClasses: parsedPluginConfig.baseClasses,
             decorators: parsedPluginConfig.decorators,
             functions: parsedPluginConfig.functions,
@@ -137,7 +135,12 @@ function hmrPlugin(pluginConfig) {
             rootDir,
           })
 
-          return transformedCode
+          if (result.code) {
+            return {
+              code: result.code,
+              map: result.map,
+            }
+          }
         } catch (/** @type {any} */ error) {
           if (error.name === 'SyntaxError') {
             // forward babel error to dev server
@@ -155,7 +158,7 @@ function hmrPlugin(pluginConfig) {
         }
       }
 
-      return transformedCode
+      return code
     },
   }
 }

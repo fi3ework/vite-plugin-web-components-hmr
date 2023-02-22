@@ -109,3 +109,4 @@ scripts/open-wc.zip
 packages/dev-server-hmr/src/**
 packages/dev-server-hmr/index.mjs
 !packages/dev-server-hmr/src/hmrPlugin.js
+!packages/dev-server-hmr/src/babel-transform.js
