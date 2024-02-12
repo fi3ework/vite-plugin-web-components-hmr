@@ -21,7 +21,8 @@ async function babelTransform(code, filename, options) {
     plugins: [
       [babelPluginWcHmr, options],
       require.resolve('@babel/plugin-syntax-class-properties'),
-      require.resolve('@babel/plugin-syntax-import-assertions'),
+      require.resolve('@babel/plugin-syntax-import-attributes'),
+      require.resolve('@babel/plugin-syntax-import-assertions'), // Deprecated
       require.resolve('@babel/plugin-syntax-top-level-await'),
     ],
     filename,
