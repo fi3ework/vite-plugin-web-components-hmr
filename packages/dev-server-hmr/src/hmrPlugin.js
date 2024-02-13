@@ -110,7 +110,7 @@ function hmrPlugin(pluginConfig) {
       }
     },
     async transform(code, id, options) {
-      if (shouldSkipHmr) return
+      if (shouldSkipHmr || options?.ssr) return
 
       const filePath = id
       if (
