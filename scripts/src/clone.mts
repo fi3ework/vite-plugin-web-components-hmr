@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename)
 
 const zipName = 'open-wc.zip'
 const dest = path.resolve(__dirname, `../../`)
-const devSeverHmrDir = 'packages/dev-server-hmr/'
+const devServerHmrDir = 'packages/dev-server-hmr/'
 
 const matchedPatterns = [
   'src/babel/**',
@@ -24,10 +24,10 @@ const matchedPatterns = [
   'src/utils.js',
   'src/wcHmrRuntime.js',
   'index.mjs',
-].map((p) => devSeverHmrDir + p)
+].map((p) => devServerHmrDir + p)
 
 const unmatchedPatterns = ['src/babel/babelTransform.js'].map(
-  (p) => devSeverHmrDir + p
+  (p) => devServerHmrDir + p
 )
 
 const pipeline = promisify(stream.pipeline)
