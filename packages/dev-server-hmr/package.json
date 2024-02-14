@@ -54,19 +54,19 @@
     "components"
   ],
   "dependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "^7.23.9",
     "@babel/plugin-syntax-class-properties": "^7.12.13",
-    "@babel/plugin-syntax-import-assertions": "^7.12.1",
     "@babel/plugin-syntax-import-attributes": "^7.23.3",
-    "@babel/plugin-syntax-top-level-await": "^7.12.1",
-    "picomatch": "^2.2.2"
+    "@babel/plugin-syntax-top-level-await": "^7.14.5",
+    "picomatch": "^4.0.1"
   },
   "peerDependencies": {
     "vite": ">=2"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.20.0",
-    "rimraf": "^3.0.2",
-    "vite": "^4.0.4"
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^20.11.17",
+    "rimraf": "^5.0.5",
+    "vite": "^5.1.1"
   }
 }
